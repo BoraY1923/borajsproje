@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title></title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    
+<style>
+    .main {
+        position: relative;
+        top: 0em;
+        margin: 1.2em;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgb(255, 255, 255);
+        height: 45em;
+        width: 30em;
+        border-style: solid;
+        border-width: 0.2em;
+        border-color: rgb(43, 43, 43);
+        border-radius: 10px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    }
+
+    #inputs {
+        align-items: center;
+        display: flex;
+        gap: 1.5em;
+        flex-direction: column;
+    }
+
+    .field span {
+        display: block;
+        width: 20em;        /* SAME as input */
+        margin-top: 6px;
+        font-size: 0.8em;
+        color: rgb(100, 100, 100);
+        text-align: left;
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
+    }
+
+    .field h3 {
+        margin: 0 0 6px 0;
+        
+        color: rgb(38, 39, 39);
+    }
+
+    input {
+        border-style: solid;
+        border-width: 0.1em;
+        border-color: rgb(0, 0, 0);
+        border-radius: 0.5em;
+          
+        
+        width: 20em;
+        height: 3em;
+    }
+
+    button {
+        color: white;
+        margin-top: 0.5em;
+        width: 272px;
+        height: 44px;
+        
+        
+        border-color: rgb(0, 0, 0);
+        font-size: 1.2em;
+        border-radius: 0.5em;
+        border-style: solid;
+        background-color: rgb(23, 184, 44);
+    }
+
+    button:hover {
+        background-color: rgb(15, 123, 30);
+        cursor: pointer;
+    }
+
+</style>
+
+
+</head>
+
+
+
+
+
+
+
+
+
+
+<body>
+    <div class="main">
+        
+        
+        <div id="inputs">
+            <div class="field">
+                <h1>Hesabınızı Oluşturun!</h1>
+            </div>
+
+            <div class="field">
+            <h3>Adınız</h3>
+            <input type="text" placeholder="Adınız" id="name"/>
+            </div>
+            
+            <div class="field">
+            <h3>Soyadınız</h3>
+            <input type="text" placeholder="Soyadınız" id="surname"/>
+            </div>
+            
+            <div class="field">
+            <h3>E-posta</h3>
+            <input type="text" placeholder="@example.com" id="email"/>
+            </div>
+            
+            <div class="field">
+            <h3>Şifre</h3>
+            <input type="text" placeholder="Şifre" id="password"/>
+            <span>8+ haneli şifreniz en az bir harf ve en az bir rakam içermelidir.</span>
+            </div>
+
+            <div class="field">
+                <button onclick="checkInfo()"> Gönder 🔰 </button>
+            </div>
+
+            <div class="field">
+                <p id="output"></p>
+            </div>
+        </div>
+
+
+        
+        
+    </div>
+
+
+
+
+
+    
+
+
+
+
+<script lang="ts">
+   
+function checkInfo() {
+    const nameInput = document.getElementById('name').value.trim();
+    const surnameInput = document.getElementById('surname').value.trim();
+    const emailInput = document.getElementById('email').value.trim();
+    const passwordInput = document.getElementById('password').value.trim();
+
+    const hasLetter = /[a-zA-Z]/.test(passwordInput);
+    const hasNumber = /[0-9]/.test(passwordInput);
+
+    const nameHasOnlyLetters = /^[a-zA-ZğüşöçıİĞÜŞÖÇ\s]+$/.test(nameInput);
+    const surnameHasOnlyLetters = /^[a-zA-ZğüşöçıİĞÜŞÖÇ\s]+$/.test(surnameInput);
+
+    
+
+    if (!nameInput || !surnameInput || !emailInput || !passwordInput) {
+        document.getElementById('output').textContent = "Tüm alanları doldurunuz*";
+        document.getElementById('output').style.color = "red";
+        return;
+    }
+
+    if (passwordInput.length < 8) {
+        document.getElementById('output').textContent = "Şifreniz en az 8 karakter uzunluğunda olmalıdır*";
+        document.getElementById('output').style.color = "red";
+        return;
+    }
+
+    if (!hasLetter || !hasNumber) {
+        document.getElementById('output').textContent = "Şifreniz en az bir harf ve en az bir rakam içermelidir*";
+        document.getElementById('output').style.color = "red";
+        return;
+    }
+
+    if (nameInput.length < 2 || surnameInput.length < 2) { 
+        document.getElementById('output').textContent = "Geçerli bir isim veya soyisim giriniz*";
+        document.getElementById('output').style.color = "red";
+        return;
+    }
+
+    if (!nameHasOnlyLetters || !surnameHasOnlyLetters) {
+        document.getElementById('output').textContent = "Ad ve soyad sadece harf içermelidir.";
+        document.getElementById('output').style.color = "red";
+        return;
+    }
+
+    /* "Ay" diye isim vardır herhalde (╭ರ_•́)*/
+
+    if (emailInput.length < 5 || !emailInput.includes('@')) { /* [., c, o, m, @] 5 karakter kesin olması gerektiğinden 5 sınırı baya zekice*/
+        document.getElementById('output').textContent = "Geçerli bir e-posta adresi giriniz*";
+        document.getElementById('output').style.color = "red";
+        return;
+    }
+
+
+    else {
+        document.getElementById('output').textContent = "Hesabınız başarıyla oluşturuldu!🐈";
+        
+        document.getElementById('output').style.fontWeight = "bold";
+        document.getElementById('output').style.color = "green";
+    }
+}
+
+    
+
+
+</script>
+
+
+</body>
+</html>

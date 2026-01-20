@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yaş koşul</title>
+
+    <style>
+        div {
+            margin: 2em auto;
+            text-align: center;
+            background-color: rgb(122, 120, 116);
+            height: 20em;
+            width: 20em;
+            border: 0.9em solid rgb(43, 43, 43);
+            border-radius: 10%;
+            padding-top: 1em;
+        }
+
+        h1, p {
+            font-family: system-ui, sans-serif;
+        }
+
+        p {
+            width: 10em;
+            margin: 1em auto;
+            color: rgb(173, 6, 6);
+        }
+
+        img {    
+            position: relative;
+            width: 8em;
+            
+            left: 50%;
+            transform: translateX(-50%);
+            
+        } 
+
+        input {
+            font-size: 1.2em;
+            padding: 0.2em;
+            border-radius: 5px;
+            border: 0.1em solid rgb(43, 43, 43);
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 0.2em 0.5em;
+            border-radius: 5px;
+            border: 0.1em solid rgb(43, 43, 43);
+            background-color: rgb(0, 209, 52);
+        }
+
+        button:hover {
+            cursor: pointer;
+            background-color: rgb(0, 170, 42);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <h1>Yaşınızı Giriniz 📩</h1>
+        <input  placeholder="yaşınızı giriniz" id="input">
+        <br><br>
+        <button onclick="checkAge()">Doğrula🛂</button>
+        <p id="output"></p>
+        <img id="image">
+    </div>
+
+    <script>
+        function checkAge() {
+            const inputElement = document.getElementById('input');
+            const output = document.getElementById('output');
+            const age = Number(inputElement.value);
+
+            if (!inputElement || !output) return;
+
+            const hasLetter = /^[a-zA-ZğüşöçıİĞÜŞÖÇ\s]+$/.test(age);
+
+            
+            image.style.display = "none";
+            image.src="";
+            image.style.display = "block";
+
+            if (age <= 0 || hasLetter) {
+                output.textContent = "Geçerli bir yaş giriniz*";
+                output.style.color = "rgb(173, 6, 6)";
+
+            } else if (age >= 125) {
+                output.textContent = "💀⚰️?";
+                output.style.color = "white";
+                image.src = "https://thumbs.dreamstime.com/b/unconscious-senior-man-walking-stick-lying-carpet-home-unconscious-senior-man-lying-carpet-149014260.jpg";
+
+            } else if (age >= 65) {
+                output.textContent = "özel izin gerekli🚫*";
+                output.style.color = "rgb(31, 5, 105)";
+                image.src= "https://c8.alamy.com/comp/MK4PYK/confused-office-worker-reading-documents-on-a-desktop-MK4PYK.jpg";
+
+            } else if (age >= 18) {
+                output.textContent = "Girebilirsiniz !!!! ✅";
+                output.style.color = "rgb(44, 218, 67)";
+                image.src = "https://c.tenor.com/MlBYXObFbtUAAAAd/tenor.gif";
+            } else {
+                output.textContent = "Reşit değilsiniz❌*";
+                output.style.color = "rgb(173, 6, 6)";
+                image.src = "https://thumbs.dreamstime.com/b/man-security-firm-talking-radio-set-keeping-distance-his-hand-63170742.jpg";
+
+            }
+
+             
+        }
+    </script>
+
+</body>
+</html>
